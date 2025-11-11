@@ -143,824 +143,843 @@ export default function App() {
   return (
     <div className="survey-root">
       <style>{css}</style>
-      <header className="survey-header">
-        <h1>Sexual Behaviour, Health & Lifestyle Survey</h1>
-        <div className="progress">
-          Step {step + 1} of {steps.length} — {steps[step]}
+
+      {step === -1 ? (
+        <div className="thank-you">
+          <h1>Thank you — your responses were submitted.</h1>
+          <p>Your participation is greatly appreciated.</p>
         </div>
-        <div className="progress-bar">
-          <div style={{ width: `${((step + 1) / steps.length) * 100}%` }} />
-        </div>
-      </header>
-
-      <form className="survey-form" onSubmit={handleSubmit}>
-        {step === 0 && (
-          <section>
-            <h2>Consent & Information</h2>
-            <p>
-              You are invited to participate in a research survey about sexual
-              behaviour, health, and lifestyle among women aged 18–40 who are
-              either not married OR not in a relationship. Participation is
-              voluntary and anonymous.
-            </p>
-            <p>
-              By clicking "I agree and continue" you confirm you are aged 18–40
-              and meet the participant criteria.
-            </p>
-            <div className="actions">
-              <button type="button" onClick={next} className="btn primary">
-                I agree and continue
-              </button>
+      ) : (
+        <>
+          <header className="survey-header">
+            <h1>Sexual Behaviour, Health & Lifestyle Survey</h1>
+            <div className="progress">
+              Step {step + 1} of {steps.length} — {steps[step]}
             </div>
-          </section>
-        )}
-
-        {step === 1 && (
-          <section>
-            <h2>Demographics</h2>
-            <label>
-              Age (18–40)
-              <input
-                name="age"
-                value={data.age}
-                onChange={handleChange}
-                placeholder="e.g. 27"
-              />
-            </label>
-            <label>
-              Country of residence
-              <input
-                name="country"
-                value={data.country}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Education level
-              <select
-                name="education"
-                value={data.education}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>High school</option>
-                <option>Undergraduate</option>
-                <option>Postgraduate</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>
-              Current occupation
-              <input
-                name="occupation"
-                value={data.occupation}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Living situation
-              <select
-                name="livingSituation"
-                value={data.livingSituation}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>Alone</option>
-                <option>With family</option>
-                <option>With roommates</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>
-              Sexual orientation
-              <select
-                name="sexualOrientation"
-                value={data.sexualOrientation}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>Heterosexual</option>
-                <option>Bisexual</option>
-                <option>Lesbian</option>
-                <option>Other</option>
-              </select>
-            </label>
-            <label>
-              Annual income level
-              <select name="income" value={data.income} onChange={handleChange}>
-                <option value="">Select</option>
-                <option>0-2000€</option>
-                <option>2000–4000€</option>
-                <option>4000–7000€</option>
-                <option>Prefer not to say</option>
-              </select>
-            </label>
-            <label>
-              Previous serious relationships
-              <select
-                name="prevSeriousRelationships"
-                value={data.prevSeriousRelationships}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>None</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3+</option>
-              </select>
-            </label>
-            <label>
-              Longest previous relationship duration
-              <select
-                name="longestRelationshipDuration"
-                value={data.longestRelationshipDuration}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>&lt;6 months</option>
-                <option>6–12 months</option>
-                <option>1–3 years</option>
-                <option>3+ years</option>
-              </select>
-            </label>
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button type="button" onClick={next} className="btn primary">
-                Next
-              </button>
+            <div className="progress-bar">
+              <div style={{ width: `${((step + 1) / steps.length) * 100}%` }} />
             </div>
-          </section>
-        )}
-
-        {step === 2 && (
-          <section>
-            <h2>Life Quality / Well-being</h2>
-            <label>
-              Overall happiness: {data.happiness}
-              <input
-                type="range"
-                name="happiness"
-                min="1"
-                max="10"
-                value={data.happiness}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Stress level: {data.stress}
-              <input
-                type="range"
-                name="stress"
-                min="1"
-                max="10"
-                value={data.stress}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Social support
-              <select
-                name="socialSupport"
-                value={data.socialSupport}
-                onChange={handleChange}
-              >
-                <option>Yes</option>
-                <option>No</option>
-                <option>Sometimes</option>
-              </select>
-            </label>
-            <label>
-              Sleep quality (1 very poor — 5 excellent)
-              <select
-                name="sleepQuality"
-                value={data.sleepQuality}
-                onChange={handleChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </label>
-            <label>
-              Exercise frequency
-              <select
-                name="exerciseFrequency"
-                value={data.exerciseFrequency}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely</option>
-                <option>Sometimes</option>
-                <option>Often</option>
-                <option>Daily</option>
-              </select>
-            </label>
-            <label>
-              Self-esteem (1–5)
-              <select
-                name="selfEsteem"
-                value={data.selfEsteem}
-                onChange={handleChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </label>
-            <label>
-              Body image satisfaction (1–5)
-              <select
-                name="bodyImage"
-                value={data.bodyImage}
-                onChange={handleChange}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </label>
-
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button type="button" onClick={next} className="btn primary">
-                Next
-              </button>
-            </div>
-          </section>
-        )}
-
-        {step === 3 && (
-          <section>
-            <h2>Health</h2>
-            <label>
-              General physical health
-              <select
-                name="physicalHealth"
-                value={data.physicalHealth}
-                onChange={handleChange}
-              >
-                <option>Poor</option>
-                <option>Fair</option>
-                <option>Good</option>
-                <option>Very Good</option>
-                <option>Excellent</option>
-              </select>
-            </label>
-            <label>
-              Ever diagnosed with a mental health condition?
-              <select
-                name="mentalHealthHistory"
-                value={data.mentalHealthHistory}
-                onChange={handleChange}
-              >
-                <option>No</option>
-                <option>Yes</option>
-              </select>
-            </label>
-            <label>
-              Steps to maintain sexual health
-              <select
-                name="sexualHealthSteps"
-                value={data.sexualHealthSteps}
-                onChange={handleChange}
-              >
-                <option>Yes</option>
-                <option>No</option>
-                <option>Sometimes</option>
-              </select>
-            </label>
-            <label>
-              History of STIs
-              <select
-                name="historyOfSTIs"
-                value={data.historyOfSTIs}
-                onChange={handleChange}
-              >
-                <option>Yes</option>
-                <option>No</option>
-                <option>Prefer not to say</option>
-              </select>
-            </label>
-            <label>
-              Contraception use
-              <select
-                name="contraceptionUse"
-                value={data.contraceptionUse}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely</option>
-                <option>Sometimes</option>
-                <option>Often</option>
-                <option>Always</option>
-              </select>
-            </label>
-            <fieldset>
-              <legend>Mental health habits (select all that apply)</legend>
-              <label>
-                <input
-                  type="checkbox"
-                  name="mentalHealthHabits"
-                  value="Therapy"
-                  onChange={handleChange}
-                  checked={data.mentalHealthHabits.includes("Therapy")}
-                />{" "}
-                Therapy
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="mentalHealthHabits"
-                  value="Meditation"
-                  onChange={handleChange}
-                  checked={data.mentalHealthHabits.includes("Meditation")}
-                />{" "}
-                Meditation
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="mentalHealthHabits"
-                  value="Mindfulness"
-                  onChange={handleChange}
-                  checked={data.mentalHealthHabits.includes("Mindfulness")}
-                />{" "}
-                Mindfulness
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="mentalHealthHabits"
-                  value="Exercise"
-                  onChange={handleChange}
-                  checked={data.mentalHealthHabits.includes("Exercise")}
-                />{" "}
-                Exercise
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="mentalHealthHabits"
-                  value="None"
-                  onChange={handleChange}
-                  checked={data.mentalHealthHabits.includes("None")}
-                />{" "}
-                None
-              </label>
-            </fieldset>
-
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button type="button" onClick={next} className="btn primary">
-                Next
-              </button>
-            </div>
-          </section>
-        )}
-
-        {step === 4 && (
-          <section>
-            <h2>Sexual Behaviour & Attitudes</h2>
-            <label>
-              Have you ever had a sexual partner?
-              <select
-                name="everHadSex"
-                value={data.everHadSex}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </label>
-            <label>
-              Age at first sexual experience
-              <input
-                name="ageFirstSex"
-                value={data.ageFirstSex}
-                onChange={handleChange}
-                placeholder="e.g. 17"
-              />
-            </label>
-            <fieldset>
-              <legend>Types of partners (select all that apply)</legend>
-              <label>
-                <input
-                  type="checkbox"
-                  name="partnerTypes"
-                  value="Casual"
-                  onChange={handleChange}
-                  checked={data.partnerTypes.includes("Casual")}
-                />{" "}
-                Casual
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="partnerTypes"
-                  value="Regular"
-                  onChange={handleChange}
-                  checked={data.partnerTypes.includes("Regular")}
-                />{" "}
-                Regular / committed
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="partnerTypes"
-                  value="Online-only"
-                  onChange={handleChange}
-                  checked={data.partnerTypes.includes("Online-only")}
-                />{" "}
-                Online-only
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="partnerTypes"
-                  value="Other"
-                  onChange={handleChange}
-                  checked={data.partnerTypes.includes("Other")}
-                />{" "}
-                Other
-              </label>
-            </fieldset>
-
-            <label>
-              Frequency of sexual activity (partnered)
-              <select
-                name="partneredFreq"
-                value={data.partneredFreq}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely (less than once a month)</option>
-                <option>Sometimes (1–3 times per month)</option>
-                <option>Often (1–3 times per week)</option>
-                <option>Very often (4+ times per week)</option>
-              </select>
-            </label>
-
-            <label>
-              Frequency of sexual activity (solo)
-              <select
-                name="soloFreq"
-                value={data.soloFreq}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely (less than once a month)</option>
-                <option>Sometimes (1–3 times per month)</option>
-                <option>Often (1–3 times per week)</option>
-                <option>Very often (4+ times per week)</option>
-              </select>
-            </label>
-
-            <label>
-              Which parts of your body do you find most sensitive to touch or
-              stimulation?
-              <textarea
-                name="sensitiveAreas"
-                value={data.sensitiveAreas}
-                onChange={handleChange}
-                rows={3}
-                placeholder=""
-              />
-            </label>
-
-            <label>
-              Are there areas of your body where you would like to experience
-              more touch or physical attention?
-              <textarea
-                name="touchPreference"
-                value={data.touchPreference}
-                onChange={handleChange}
-                rows={3}
-                placeholder=""
-              />
-            </label>
-
-            <label>
-              How confident do you feel about your body when it comes to
-              intimacy or being seen by a partner?
-              <select
-                name="bodyConfidence"
-                value={data.bodyConfidence}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option>Not confident at all</option>
-                <option>Slightly confident</option>
-                <option>Moderately confident</option>
-                <option>Very confident</option>
-                <option>Extremely confident</option>
-              </select>
-            </label>
-
-            <label>
-              How often do you masturbate?
-              <select
-                name="masturbationFreq"
-                value={data.masturbationFreq}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely (less than once a month)</option>
-                <option>Sometimes (1–3 times per month)</option>
-                <option>Often (1–3 times per week)</option>
-                <option>Very often (4+ times per week)</option>
-              </select>
-            </label>
-
-            <label>
-              How often do you use sex toys?
-              <select
-                name="sexToyFreq"
-                value={data.sexToyFreq}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely</option>
-                <option>Sometimes</option>
-                <option>Often</option>
-                <option>Very often</option>
-              </select>
-            </label>
-
-            <label>
-              Number of sexual partners in last 12 months
-              <select
-                name="partnersLast12Months"
-                value={data.partnersLast12Months}
-                onChange={handleChange}
-              >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3+</option>
-              </select>
-            </label>
-            <label>
-              Number of sexual partners in lifetime
-              <select
-                name="partnersLifetime"
-                value={data.partnersLifetime}
-                onChange={handleChange}
-              >
-                <option>0–5</option>
-                <option>6–10</option>
-                <option>11–20</option>
-                <option>20+</option>
-              </select>
-            </label>
-
-            <label>
-              Comfort discussing sexual topics with friends:{" "}
-              {data.comfortDiscussFriends}
-              <input
-                type="range"
-                min="1"
-                max="5"
-                name="comfortDiscussFriends"
-                value={data.comfortDiscussFriends}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Comfort discussing sexual topics with partner:{" "}
-              {data.comfortDiscussPartner}
-              <input
-                type="range"
-                min="1"
-                max="5"
-                name="comfortDiscussPartner"
-                value={data.comfortDiscussPartner}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Sexual life satisfaction: {data.sexualSatisfaction}
-              <input
-                type="range"
-                min="1"
-                max="5"
-                name="sexualSatisfaction"
-                value={data.sexualSatisfaction}
-                onChange={handleChange}
-              />
-            </label>
-
-            <label>
-              Sexual fantasies you want to explore (short)
-              <textarea
-                name="fantasies"
-                value={data.fantasies}
-                onChange={handleChange}
-                rows={3}
-                placeholder=""
-              />
-            </label>
-            <label>
-              Sexual activities you would never try (short)
-              <textarea
-                name="neverTry"
-                value={data.neverTry}
-                onChange={handleChange}
-                rows={3}
-                placeholder=""
-              />
-            </label>
-            <label>
-              Are you open to having multiple sexual partners simultaneously?
-              <select
-                name="opennessMultiple"
-                value={data.opennessMultiple}
-                onChange={handleChange}
-              >
-                <option>Yes</option>
-                <option>No</option>
-                <option>Maybe</option>
-              </select>
-            </label>
-            <label>
-              How do you feel about casual sex? (short)
-              <textarea
-                name="casualSexAttitude"
-                value={data.casualSexAttitude}
-                onChange={handleChange}
-                rows={2}
-                placeholder=""
-              />
-            </label>
-            <label>
-              Attitude toward polyamory / non-monogamy: {data.polyamoryAttitude}
-              <input
-                type="range"
-                min="1"
-                max="5"
-                name="polyamoryAttitude"
-                value={data.polyamoryAttitude}
-                onChange={handleChange}
-              />
-            </label>
-
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button type="button" onClick={next} className="btn primary">
-                Next
-              </button>
-            </div>
-          </section>
-        )}
-
-        {step === 5 && (
-          <section>
-            <h2>Technology & Media</h2>
-            <label>
-              Use of dating apps
-              <select
-                name="datingAppUse"
-                value={data.datingAppUse}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely</option>
-                <option>Sometimes</option>
-                <option>Often</option>
-              </select>
-            </label>
-            <label>
-              Use of pornography
-              <select
-                name="pornUse"
-                value={data.pornUse}
-                onChange={handleChange}
-              >
-                <option>Never</option>
-                <option>Rarely</option>
-                <option>Sometimes</option>
-                <option>Often</option>
-              </select>
-            </label>
-            <fieldset>
-              <legend>Sources of sex education (select all that apply)</legend>
-              <label>
-                <input
-                  type="checkbox"
-                  name="sexEdSources"
-                  value="School"
-                  onChange={handleChange}
-                  checked={data.sexEdSources.includes("School")}
-                />{" "}
-                School
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="sexEdSources"
-                  value="Internet"
-                  onChange={handleChange}
-                  checked={data.sexEdSources.includes("Internet")}
-                />{" "}
-                Internet
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="sexEdSources"
-                  value="Friends"
-                  onChange={handleChange}
-                  checked={data.sexEdSources.includes("Friends")}
-                />{" "}
-                Friends
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="sexEdSources"
-                  value="Family"
-                  onChange={handleChange}
-                  checked={data.sexEdSources.includes("Family")}
-                />{" "}
-                Family
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="sexEdSources"
-                  value="Other"
-                  onChange={handleChange}
-                  checked={data.sexEdSources.includes("Other")}
-                />{" "}
-                Other
-              </label>
-            </fieldset>
-
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button type="button" onClick={next} className="btn primary">
-                Next
-              </button>
-            </div>
-          </section>
-        )}
-
-        {step === 6 && (
-          <section>
-            <h2>Closing</h2>
-            <label>
-              Any additional thoughts or experiences you'd like to share?
-              <textarea
-                name="additionalThoughts"
-                value={data.additionalThoughts}
-                onChange={handleChange}
-                rows={4}
-                placeholder="Optional"
-              />
-            </label>
-
-            <div className="actions">
-              <button type="button" onClick={prev} className="btn">
-                Back
-              </button>
-              <button
-                type="submit"
-                className="btn primary"
-                disabled={submitting}
-              >
-                {submitting ? "Submitting..." : "Submit"}
-              </button>
-            </div>
-
-            {message && (
-              <div className={`message ${message.type}`}>{message.text}</div>
+          </header>
+          <form className="survey-form" onSubmit={handleSubmit}>
+            {step === 0 && (
+              <section>
+                <h2>Consent & Information</h2>
+                <p>
+                  You are invited to participate in a research survey about
+                  sexual behaviour, health, and lifestyle among women aged 18–40
+                  who are either not married OR not in a relationship.
+                  Participation is voluntary and anonymous.
+                </p>
+                <p>
+                  By clicking "I agree and continue" you confirm you are aged
+                  18–40 and meet the participant criteria.
+                </p>
+                <div className="actions">
+                  <button type="button" onClick={next} className="btn primary">
+                    I agree and continue
+                  </button>
+                </div>
+              </section>
             )}
-          </section>
-        )}
-      </form>
 
-      <footer className="survey-footer">
-        <small>
-          All responses are anonymous and voluntary. Thank you so much for your
-          feedback.
-        </small>
-      </footer>
+            {step === 1 && (
+              <section>
+                <h2>Demographics</h2>
+                <label>
+                  Age (18–40)
+                  <input
+                    name="age"
+                    value={data.age}
+                    onChange={handleChange}
+                    placeholder="e.g. 27"
+                  />
+                </label>
+                <label>
+                  Country of residence
+                  <input
+                    name="country"
+                    value={data.country}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Education level
+                  <select
+                    name="education"
+                    value={data.education}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>High school</option>
+                    <option>Undergraduate</option>
+                    <option>Postgraduate</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Current occupation
+                  <input
+                    name="occupation"
+                    value={data.occupation}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Living situation
+                  <select
+                    name="livingSituation"
+                    value={data.livingSituation}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>Alone</option>
+                    <option>With family</option>
+                    <option>With roommates</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Sexual orientation
+                  <select
+                    name="sexualOrientation"
+                    value={data.sexualOrientation}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>Heterosexual</option>
+                    <option>Bisexual</option>
+                    <option>Lesbian</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  Annual income level
+                  <select
+                    name="income"
+                    value={data.income}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>0-2000€</option>
+                    <option>2000–4000€</option>
+                    <option>4000–7000€</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Previous serious relationships
+                  <select
+                    name="prevSeriousRelationships"
+                    value={data.prevSeriousRelationships}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>None</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3+</option>
+                  </select>
+                </label>
+                <label>
+                  Longest previous relationship duration
+                  <select
+                    name="longestRelationshipDuration"
+                    value={data.longestRelationshipDuration}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>&lt;6 months</option>
+                    <option>6–12 months</option>
+                    <option>1–3 years</option>
+                    <option>3+ years</option>
+                  </select>
+                </label>
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button type="button" onClick={next} className="btn primary">
+                    Next
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {step === 2 && (
+              <section>
+                <h2>Life Quality / Well-being</h2>
+                <label>
+                  Overall happiness: {data.happiness}
+                  <input
+                    type="range"
+                    name="happiness"
+                    min="1"
+                    max="10"
+                    value={data.happiness}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Stress level: {data.stress}
+                  <input
+                    type="range"
+                    name="stress"
+                    min="1"
+                    max="10"
+                    value={data.stress}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Social support
+                  <select
+                    name="socialSupport"
+                    value={data.socialSupport}
+                    onChange={handleChange}
+                  >
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Sometimes</option>
+                  </select>
+                </label>
+                <label>
+                  Sleep quality (1 very poor — 5 excellent)
+                  <select
+                    name="sleepQuality"
+                    value={data.sleepQuality}
+                    onChange={handleChange}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </label>
+                <label>
+                  Exercise frequency
+                  <select
+                    name="exerciseFrequency"
+                    value={data.exerciseFrequency}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely</option>
+                    <option>Sometimes</option>
+                    <option>Often</option>
+                    <option>Daily</option>
+                  </select>
+                </label>
+                <label>
+                  Self-esteem (1–5)
+                  <select
+                    name="selfEsteem"
+                    value={data.selfEsteem}
+                    onChange={handleChange}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </label>
+                <label>
+                  Body image satisfaction (1–5)
+                  <select
+                    name="bodyImage"
+                    value={data.bodyImage}
+                    onChange={handleChange}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </label>
+
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button type="button" onClick={next} className="btn primary">
+                    Next
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {step === 3 && (
+              <section>
+                <h2>Health</h2>
+                <label>
+                  General physical health
+                  <select
+                    name="physicalHealth"
+                    value={data.physicalHealth}
+                    onChange={handleChange}
+                  >
+                    <option>Poor</option>
+                    <option>Fair</option>
+                    <option>Good</option>
+                    <option>Very Good</option>
+                    <option>Excellent</option>
+                  </select>
+                </label>
+                <label>
+                  Ever diagnosed with a mental health condition?
+                  <select
+                    name="mentalHealthHistory"
+                    value={data.mentalHealthHistory}
+                    onChange={handleChange}
+                  >
+                    <option>No</option>
+                    <option>Yes</option>
+                  </select>
+                </label>
+                <label>
+                  Steps to maintain sexual health
+                  <select
+                    name="sexualHealthSteps"
+                    value={data.sexualHealthSteps}
+                    onChange={handleChange}
+                  >
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Sometimes</option>
+                  </select>
+                </label>
+                <label>
+                  History of STIs
+                  <select
+                    name="historyOfSTIs"
+                    value={data.historyOfSTIs}
+                    onChange={handleChange}
+                  >
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </label>
+                <label>
+                  Contraception use
+                  <select
+                    name="contraceptionUse"
+                    value={data.contraceptionUse}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely</option>
+                    <option>Sometimes</option>
+                    <option>Often</option>
+                    <option>Always</option>
+                  </select>
+                </label>
+                <fieldset>
+                  <legend>Mental health habits (select all that apply)</legend>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="mentalHealthHabits"
+                      value="Therapy"
+                      onChange={handleChange}
+                      checked={data.mentalHealthHabits.includes("Therapy")}
+                    />{" "}
+                    Therapy
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="mentalHealthHabits"
+                      value="Meditation"
+                      onChange={handleChange}
+                      checked={data.mentalHealthHabits.includes("Meditation")}
+                    />{" "}
+                    Meditation
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="mentalHealthHabits"
+                      value="Mindfulness"
+                      onChange={handleChange}
+                      checked={data.mentalHealthHabits.includes("Mindfulness")}
+                    />{" "}
+                    Mindfulness
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="mentalHealthHabits"
+                      value="Exercise"
+                      onChange={handleChange}
+                      checked={data.mentalHealthHabits.includes("Exercise")}
+                    />{" "}
+                    Exercise
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="mentalHealthHabits"
+                      value="None"
+                      onChange={handleChange}
+                      checked={data.mentalHealthHabits.includes("None")}
+                    />{" "}
+                    None
+                  </label>
+                </fieldset>
+
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button type="button" onClick={next} className="btn primary">
+                    Next
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {step === 4 && (
+              <section>
+                <h2>Sexual Behaviour & Attitudes</h2>
+                <label>
+                  Have you ever had a sexual partner?
+                  <select
+                    name="everHadSex"
+                    value={data.everHadSex}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </label>
+                <label>
+                  Age at first sexual experience
+                  <input
+                    name="ageFirstSex"
+                    value={data.ageFirstSex}
+                    onChange={handleChange}
+                    placeholder="e.g. 17"
+                  />
+                </label>
+                <fieldset>
+                  <legend>Types of partners (select all that apply)</legend>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="partnerTypes"
+                      value="Casual"
+                      onChange={handleChange}
+                      checked={data.partnerTypes.includes("Casual")}
+                    />{" "}
+                    Casual
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="partnerTypes"
+                      value="Regular"
+                      onChange={handleChange}
+                      checked={data.partnerTypes.includes("Regular")}
+                    />{" "}
+                    Regular / committed
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="partnerTypes"
+                      value="Online-only"
+                      onChange={handleChange}
+                      checked={data.partnerTypes.includes("Online-only")}
+                    />{" "}
+                    Online-only
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="partnerTypes"
+                      value="Other"
+                      onChange={handleChange}
+                      checked={data.partnerTypes.includes("Other")}
+                    />{" "}
+                    Other
+                  </label>
+                </fieldset>
+
+                <label>
+                  Frequency of sexual activity (partnered)
+                  <select
+                    name="partneredFreq"
+                    value={data.partneredFreq}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely (less than once a month)</option>
+                    <option>Sometimes (1–3 times per month)</option>
+                    <option>Often (1–3 times per week)</option>
+                    <option>Very often (4+ times per week)</option>
+                  </select>
+                </label>
+
+                <label>
+                  Frequency of sexual activity (solo)
+                  <select
+                    name="soloFreq"
+                    value={data.soloFreq}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely (less than once a month)</option>
+                    <option>Sometimes (1–3 times per month)</option>
+                    <option>Often (1–3 times per week)</option>
+                    <option>Very often (4+ times per week)</option>
+                  </select>
+                </label>
+
+                <label>
+                  Which parts of your body do you find most sensitive to touch
+                  or stimulation?
+                  <textarea
+                    name="sensitiveAreas"
+                    value={data.sensitiveAreas}
+                    onChange={handleChange}
+                    rows={3}
+                    placeholder=""
+                  />
+                </label>
+
+                <label>
+                  Are there areas of your body where you would like to
+                  experience more touch or physical attention?
+                  <textarea
+                    name="touchPreference"
+                    value={data.touchPreference}
+                    onChange={handleChange}
+                    rows={3}
+                    placeholder=""
+                  />
+                </label>
+
+                <label>
+                  How confident do you feel about your body when it comes to
+                  intimacy or being seen by a partner?
+                  <select
+                    name="bodyConfidence"
+                    value={data.bodyConfidence}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option>Not confident at all</option>
+                    <option>Slightly confident</option>
+                    <option>Moderately confident</option>
+                    <option>Very confident</option>
+                    <option>Extremely confident</option>
+                  </select>
+                </label>
+
+                <label>
+                  How often do you masturbate?
+                  <select
+                    name="masturbationFreq"
+                    value={data.masturbationFreq}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely (less than once a month)</option>
+                    <option>Sometimes (1–3 times per month)</option>
+                    <option>Often (1–3 times per week)</option>
+                    <option>Very often (4+ times per week)</option>
+                  </select>
+                </label>
+
+                <label>
+                  How often do you use sex toys?
+                  <select
+                    name="sexToyFreq"
+                    value={data.sexToyFreq}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely</option>
+                    <option>Sometimes</option>
+                    <option>Often</option>
+                    <option>Very often</option>
+                  </select>
+                </label>
+
+                <label>
+                  Number of sexual partners in last 12 months
+                  <select
+                    name="partnersLast12Months"
+                    value={data.partnersLast12Months}
+                    onChange={handleChange}
+                  >
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3+</option>
+                  </select>
+                </label>
+                <label>
+                  Number of sexual partners in lifetime
+                  <select
+                    name="partnersLifetime"
+                    value={data.partnersLifetime}
+                    onChange={handleChange}
+                  >
+                    <option>0–5</option>
+                    <option>6–10</option>
+                    <option>11–20</option>
+                    <option>20+</option>
+                  </select>
+                </label>
+
+                <label>
+                  Comfort discussing sexual topics with friends:{" "}
+                  {data.comfortDiscussFriends}
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    name="comfortDiscussFriends"
+                    value={data.comfortDiscussFriends}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Comfort discussing sexual topics with partner:{" "}
+                  {data.comfortDiscussPartner}
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    name="comfortDiscussPartner"
+                    value={data.comfortDiscussPartner}
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  Sexual life satisfaction: {data.sexualSatisfaction}
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    name="sexualSatisfaction"
+                    value={data.sexualSatisfaction}
+                    onChange={handleChange}
+                  />
+                </label>
+
+                <label>
+                  Sexual fantasies you want to explore (short)
+                  <textarea
+                    name="fantasies"
+                    value={data.fantasies}
+                    onChange={handleChange}
+                    rows={3}
+                    placeholder=""
+                  />
+                </label>
+                <label>
+                  Sexual activities you would never try (short)
+                  <textarea
+                    name="neverTry"
+                    value={data.neverTry}
+                    onChange={handleChange}
+                    rows={3}
+                    placeholder=""
+                  />
+                </label>
+                <label>
+                  Are you open to having multiple sexual partners
+                  simultaneously?
+                  <select
+                    name="opennessMultiple"
+                    value={data.opennessMultiple}
+                    onChange={handleChange}
+                  >
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Maybe</option>
+                  </select>
+                </label>
+                <label>
+                  How do you feel about casual sex? (short)
+                  <textarea
+                    name="casualSexAttitude"
+                    value={data.casualSexAttitude}
+                    onChange={handleChange}
+                    rows={2}
+                    placeholder=""
+                  />
+                </label>
+                <label>
+                  Attitude toward polyamory / non-monogamy:{" "}
+                  {data.polyamoryAttitude}
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    name="polyamoryAttitude"
+                    value={data.polyamoryAttitude}
+                    onChange={handleChange}
+                  />
+                </label>
+
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button type="button" onClick={next} className="btn primary">
+                    Next
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {step === 5 && (
+              <section>
+                <h2>Technology & Media</h2>
+                <label>
+                  Use of dating apps
+                  <select
+                    name="datingAppUse"
+                    value={data.datingAppUse}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely</option>
+                    <option>Sometimes</option>
+                    <option>Often</option>
+                  </select>
+                </label>
+                <label>
+                  Use of pornography
+                  <select
+                    name="pornUse"
+                    value={data.pornUse}
+                    onChange={handleChange}
+                  >
+                    <option>Never</option>
+                    <option>Rarely</option>
+                    <option>Sometimes</option>
+                    <option>Often</option>
+                  </select>
+                </label>
+                <fieldset>
+                  <legend>
+                    Sources of sex education (select all that apply)
+                  </legend>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="sexEdSources"
+                      value="School"
+                      onChange={handleChange}
+                      checked={data.sexEdSources.includes("School")}
+                    />{" "}
+                    School
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="sexEdSources"
+                      value="Internet"
+                      onChange={handleChange}
+                      checked={data.sexEdSources.includes("Internet")}
+                    />{" "}
+                    Internet
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="sexEdSources"
+                      value="Friends"
+                      onChange={handleChange}
+                      checked={data.sexEdSources.includes("Friends")}
+                    />{" "}
+                    Friends
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="sexEdSources"
+                      value="Family"
+                      onChange={handleChange}
+                      checked={data.sexEdSources.includes("Family")}
+                    />{" "}
+                    Family
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="sexEdSources"
+                      value="Other"
+                      onChange={handleChange}
+                      checked={data.sexEdSources.includes("Other")}
+                    />{" "}
+                    Other
+                  </label>
+                </fieldset>
+
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button type="button" onClick={next} className="btn primary">
+                    Next
+                  </button>
+                </div>
+              </section>
+            )}
+
+            {step === 6 && (
+              <section>
+                <h2>Closing</h2>
+                <label>
+                  Any additional thoughts or experiences you'd like to share?
+                  <textarea
+                    name="additionalThoughts"
+                    value={data.additionalThoughts}
+                    onChange={handleChange}
+                    rows={4}
+                    placeholder="Optional"
+                  />
+                </label>
+
+                <div className="actions">
+                  <button type="button" onClick={prev} className="btn">
+                    Back
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn primary"
+                    disabled={submitting}
+                  >
+                    {submitting ? "Submitting..." : "Submit"}
+                  </button>
+                </div>
+
+                {message && (
+                  <div className={`message ${message.type}`}>
+                    {message.text}
+                  </div>
+                )}
+              </section>
+            )}
+          </form>
+          <footer className="survey-footer">
+            <small>
+              All responses are anonymous and voluntary. Thank you so much for
+              your feedback.
+            </small>
+          </footer>
+          \
+        </>
+      )}
     </div>
   );
 }
@@ -986,4 +1005,23 @@ legend{font-weight:600}
 .message.success{background:#e6ffef;border:1px solid #b7f0c9}
 .message.error{background:#ffe6e6;border:1px solid #f0b7b7}
 .survey-footer{margin-top:18px;text-align:center;color:#666}
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+}
+
+.thank-you h1 {
+  color: #6c63ff;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.thank-you p {
+  color: #555;
+  font-size: 1rem;
+}
 `;
