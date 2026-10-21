@@ -10,7 +10,7 @@ const stateKeys = [
   "age country education occupation livingSituation sexualOrientation incomeLevel seriousRelationships longestRelationship",
   "happiness stress sleepQuality exerciseFrequency bodyImageSatisfaction selfConfidence comparativeAttractiveness sexualAttractiveness",
   "everHadIntercourse ageFirstExperience lifetimePartners partnersLast12Months recentPartnerType currentDesire masturbationFrequency enjoySelfPleasure orgasmEase sexualLifeSatisfaction",
-  "lastAttractedTouch lastAttractedTouchFeeling lastMeaningfulTouch lastMeaningfulTouchFeeling desiredTouchFeeling favoriteTouchAreas favoriteTouchWhy moreAttentionAreas moreAttentionWhy massageExperience massageFeeling touchImportance attractionIncreasingTouch",
+  "lastAttractedTouch lastAttractedTouchFeeling lastMeaningfulTouch lastMeaningfulTouchFeeling desiredTouchFeeling favoriteTouchAreas favoriteTouchWhy moreAttentionAreas moreAttentionWhy massageExperience massageFeeling massageInterest touchImportance attractionIncreasingTouch",
   "noticeAttractivePeople firstAttractionCue attractiveQualities desiredCompliments attractionCommunication attractionWithLittleClothing",
   "excitingFantasy realisticFantasy imaginedScenario imaginedMultiplePartners considerMultiplePartners multiplePartnerSetting fantasyOpenness",
   "attractedToCommittedPerson relationshipWithCommittedPerson involvementWithMarriedPerson involvementFactors relationshipBoundaries attractionReducingBehaviors",
@@ -173,30 +173,32 @@ const sections = [
   },
   {
     title: "Physical Touch & Sensuality",
+    intro:
+      "A brief answer is enough. Focus on what feels comfortable and meaningful to you.",
     fields: [
       [
         "lastAttractedTouch",
-        "When was the last time you touched a person you were physically attracted to?",
+        "When did you last share physical contact with someone you felt attracted to?",
         "textarea",
       ],
       [
         "lastAttractedTouchFeeling",
-        "Describe what happened and how it made you feel.",
+        "What did you feel in that moment, emotionally or physically?",
         "textarea",
       ],
       [
         "lastMeaningfulTouch",
-        "When was the last time someone touched you in a meaningful, comforting, exciting, or emotionally significant way?",
+        "When did you last experience meaningful, comforting, or exciting physical contact?",
         "textarea",
       ],
       [
         "lastMeaningfulTouchFeeling",
-        "Describe the situation and your feelings.",
+        "What made that contact feel meaningful to you?",
         "textarea",
       ],
       [
         "desiredTouchFeeling",
-        "What does being touched by someone you desire feel like emotionally and physically?",
+        "When you imagine wanted physical affection, what feelings or sensations come to mind?",
         "textarea",
       ],
       [
@@ -204,37 +206,52 @@ const sections = [
         "Which areas of your body do you most enjoy being touched?",
         "textarea",
       ],
-      ["favoriteTouchWhy", "Why?", "textarea"],
+      [
+        "favoriteTouchWhy",
+        "What do you enjoy about being touched there?",
+        "textarea",
+      ],
       [
         "moreAttentionAreas",
         "Which areas of your body would you like a partner to pay more attention to?",
         "textarea",
       ],
-      ["moreAttentionWhy", "Why?", "textarea"],
+      [
+        "moreAttentionWhy",
+        "What kind of attention would feel good to you, and why?",
+        "textarea",
+      ],
       [
         "massageExperience",
-        "Have you ever received a sensual or relaxing massage? Describe how it felt.",
+        "Have you ever shared a quiet moment of physical closeness with someone, such as cuddling or holding each other? Briefly describe it, or write “Not applicable.”",
         "textarea",
       ],
       [
         "massageFeeling",
-        "What did the massage feel like emotionally and physically?",
+        "What, if anything, made that moment of closeness feel relaxing or uncomfortable? If not applicable, write “Not applicable.”",
+        "textarea",
+      ],
+      [
+        "massageInterest",
+        "If you have never shared a moment like this, would you like to? Why or why not? If you have, write “Already have.”",
         "textarea",
       ],
       [
         "touchImportance",
-        "How important is physical touch in creating attraction for you?",
+        "How does physical affection influence attraction for you? A short example is welcome.",
         "textarea",
       ],
       [
         "attractionIncreasingTouch",
-        "What type of touch immediately increases your attraction toward someone?",
+        "What kind of consensual touch, if any, helps you feel closer or more attracted to someone?",
         "textarea",
       ],
     ],
   },
   {
     title: "Attraction & Desire",
+    intro:
+      "Answer in a few words or sentences; use an example if one comes to mind.",
     fields: [
       [
         "noticeAttractivePeople",
@@ -259,17 +276,17 @@ const sections = [
       ],
       [
         "attractiveQualities",
-        "Describe the most attractive qualities a person can have.",
+        "Which qualities make someone attractive to you beyond appearance? What makes those qualities appealing?",
         "textarea",
       ],
       [
         "desiredCompliments",
-        "What type of compliments or words make you feel most desired?",
+        "What kind of compliment makes you feel seen or desired, and why does it resonate with you?",
         "textarea",
       ],
       [
         "attractionCommunication",
-        "What type of statements, conversations, or communication styles increase attraction for you?",
+        "What kinds of conversation or communication make you feel a stronger connection or attraction?",
         "textarea",
       ],
       [
@@ -281,20 +298,22 @@ const sections = [
   },
   {
     title: "Fantasies & Imagination",
+    intro:
+      "Take your time here. A few vivid details can help us understand what appeals to you. You can describe the atmosphere, setting, people involved, emotions, pace, and what makes the scenario exciting or meaningful. Keep your answer within your own comfort level.",
     fields: [
       [
         "excitingFantasy",
-        "Describe a fantasy that you find exciting but have never experienced.",
+        "Describe a romantic or intimate fantasy you find exciting, whether or not you would want to experience it in real life. What happens, what is the setting and atmosphere, and what feelings or details make it appealing to you?",
         "textarea",
       ],
       [
         "realisticFantasy",
-        "Describe a fantasy that you would realistically like to experience one day.",
+        "If you feel comfortable sharing, describe a romantic or intimate experience you might genuinely want to try. What would need to happen for it to feel safe, enjoyable, and right for you?",
         "textarea",
       ],
       [
         "imaginedScenario",
-        "Describe an imaginary romantic or intimate scenario that frequently appears in your thoughts.",
+        "What kinds of romantic or intimate scenarios tend to return to your imagination? Describe any recurring themes, roles, emotions, or details that stand out.",
         "textarea",
       ],
       [
@@ -311,7 +330,7 @@ const sections = [
       ],
       [
         "multiplePartnerSetting",
-        "What environment, setting, or circumstances would make that experience comfortable for you?",
+        "If this idea interests you, what boundaries, communication, setting, or circumstances would help everyone feel comfortable? If it does not interest you, briefly say why or write “Not applicable.”",
         "textarea",
       ],
       [
@@ -323,6 +342,8 @@ const sections = [
   },
   {
     title: "Relationships & Boundaries",
+    intro:
+      "Brief, direct answers are welcome. Share only the detail needed to explain your view.",
     fields: [
       [
         "attractedToCommittedPerson",
@@ -344,23 +365,24 @@ const sections = [
       ],
       [
         "involvementFactors",
-        "What factors would influence your decision?",
+        "What values or circumstances would most influence your decision?",
         "textarea",
       ],
       [
         "relationshipBoundaries",
-        "What personal boundaries are most important to you in relationships?",
+        "Which boundary is especially important to you in a relationship, and how would you want a partner to respect it?",
         "textarea",
       ],
       [
         "attractionReducingBehaviors",
-        "What behaviors immediately reduce attraction for you?",
+        "Which behaviors tend to reduce your attraction or trust, and what about them matters to you?",
         "textarea",
       ],
     ],
   },
   {
     title: "Social & Peer Discussions",
+    intro: "A short answer is enough; you may give a simple example.",
     fields: [
       [
         "friendsComfort",
@@ -386,79 +408,91 @@ const sections = [
       ],
       [
         "shareExperiences",
-        "Do you openly share your own experiences with friends?",
+        "How openly do you share your own experiences with friends? Briefly describe what you do or do not share.",
         "textarea",
       ],
-      ["shareExperiencesWhy", "Why or why not?", "textarea"],
+      [
+        "shareExperiencesWhy",
+        "What makes sharing feel comfortable or uncomfortable for you?",
+        "textarea",
+      ],
       [
         "socialConversationFrequency",
-        "How often do conversations about relationships, attraction, or sexuality occur within your social circle?",
+        "How often do these conversations happen in your social circle, and what are they usually like?",
         "textarea",
       ],
       [
         "easiestTopics",
-        "What topics related to attraction or relationships are easiest for you to discuss?",
+        "Which relationship or attraction topics are easiest for you to discuss, and why?",
         "textarea",
       ],
       [
         "hardestTopics",
-        "What topics are hardest for you to discuss?",
+        "Which topics are hardest to discuss, and what makes them difficult?",
         "textarea",
       ],
     ],
   },
   {
     title: "Recent Experiences",
+    intro:
+      "A couple of sentences is enough. You do not need to identify anyone.",
     fields: [
       [
         "lastStrongAttraction",
-        "When was the last time you felt strong attraction toward someone?",
+        "When did you last feel strongly attracted to someone? Briefly describe the context, or write “Not applicable.”",
         "textarea",
       ],
-      ["lastStrongAttractionSituation", "Describe the situation.", "textarea"],
+      [
+        "lastStrongAttractionSituation",
+        "What specifically sparked or strengthened that attraction? If not applicable, write “Not applicable.”",
+        "textarea",
+      ],
       [
         "lastSexualInterest",
-        "When was the last time you felt sexually interested in someone?",
+        "When did you last feel sexual interest in someone?",
         "textarea",
       ],
       [
         "lastSexualInterestTrigger",
-        "Describe what triggered the feeling.",
+        "What contributed to that feeling?",
         "textarea",
       ],
       [
         "lastEmotionalConnection",
-        "When was the last time you felt emotionally connected to someone?",
+        "When did you last feel emotionally connected to someone? ",
         "textarea",
       ],
       [
         "lastEmotionalConnectionExperience",
-        "Describe the experience.",
+        "What helped create that sense of connection? ",
         "textarea",
       ],
       [
         "desireCreators",
-        "What usually creates desire for you: physical appearance, emotional connection, conversation, attention, or something else?",
+        "What tends to create desire for you? Consider appearance, emotional connection, conversation, attention, mood, or other factors; which matters most and why?",
         "textarea",
       ],
     ],
   },
   {
     title: "Final Thoughts",
+    intro:
+      "Short reflections are welcome. Add detail only where it feels useful.",
     fields: [
       [
         "misunderstoodSexuality",
-        "What do you believe most people misunderstand about female sexuality?",
+        "What do you think people often misunderstand about women’s sexuality?",
         "textarea",
       ],
       [
         "relationshipLessons",
-        "What have your experiences taught you about attraction and relationships?",
+        "What has experience taught you about what you need or value in relationships?",
         "textarea",
       ],
       [
         "additionalThoughts",
-        "Is there anything else you would like to share?",
+        "What is one thing about your experience of attraction, intimacy, or relationships you wish this survey had asked?",
         "textarea",
       ],
     ],
@@ -467,7 +501,7 @@ const sections = [
 
 function Field({ field, value, onChange }) {
   const [name, label, type, values] = field;
-  const required = type !== "textarea";
+  const required = true;
   return (
     <label className="field" htmlFor={name}>
       <span>
@@ -481,6 +515,14 @@ function Field({ field, value, onChange }) {
           value={value}
           onChange={onChange}
           rows={4}
+          required
+          placeholder={
+            name === "excitingFantasy" ||
+            name === "realisticFantasy" ||
+            name === "imaginedScenario"
+              ? "Share as much detail as feels comfortable."
+              : "A brief answer is enough."
+          }
         />
       ) : type === "range" ? (
         <div className="range-wrap">
@@ -612,9 +654,7 @@ export default function SurveyApp() {
           >
             Begin survey <span>→</span>
           </button>
-          <small>
-            Voluntary participation · You may skip any open question
-          </small>
+          <small>Voluntary participation</small>
         </div>
       </main>
     );
